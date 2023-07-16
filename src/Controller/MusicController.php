@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class MusicController extends AbstractController
 {
-    #[Route("/home/{name}", name: "getMusic")]
+    #[Route("/home", name: "getMusic")]
     public function getMusic()
     {
         $music=
@@ -47,4 +47,5 @@ class MusicController extends AbstractController
     return $this->render("Music/music.html.twig",["music"=> $music]);
 
     }
-}
+   
+    }
