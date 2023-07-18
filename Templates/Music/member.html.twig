@@ -1,0 +1,31 @@
+{% extends "Music/baseMusic.html.twig" %}
+
+{% block title %}Hazte nuevo miembro!{% endblock %}
+
+ <h1>Añadir miembro</h1>
+
+{% block body %}
+
+   
+    <form action="{{ path('member') }}" method="POST" enctype="multipart/form-data">
+    {{form(memberForm)}}
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="age">Edad:</label>
+        <input type="number" id="age" name="age" required>
+
+        <label for="origin">Origen:</label>
+        <input type="text" id="origin" name="origin" required>
+
+        <label for="instrument">Instrumento:</label>
+        <input type="text" id="instrument" name="instrument" required>
+
+        <label for="pic">Foto:</label>
+        <input type="file" id="pic" name="pic" accept="image/*" required>
+
+        <button type="submit">Añadir</button>
+    </form>
+
+{% endblock %}
+

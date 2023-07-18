@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MusicRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MusicRepository::class)]
@@ -27,6 +29,14 @@ class Music
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $pic = null;
+
+    #[ORM\OneToMany(mappedBy: 'music', targetEntity: Discografía::class)]
+    private Collection $discografía;
+
+    public function __construct()
+    {
+        $this->discografía = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -89,6 +99,36 @@ class Music
     public function setPic(?string $pic): static
     {
         $this->pic = $pic;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Discografía>
+     */
+    public function getDiscografía(): Collection
+    {
+        return $this->discografía;
+    }
+
+    public function addDiscografA(Discografía $discografA): static
+    {
+        if (!$this->discografía->contains($discografA)) {
+            $this->discografía->add($discografA);
+            $discografA->setMusic($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDiscografA(Discografía $discografA): static
+    {
+        if ($this->discografía->removeElement($discografA)) {
+            // set the owning side to null (unless already changed)
+            if ($discografA->getMusic() === $this) {
+                $discografA->setMusic(null);
+            }
+        }
 
         return $this;
     }

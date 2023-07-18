@@ -3,13 +3,14 @@
 {% block contenido %}
     <h2>Listado de Metallica </h2>
     <div class="row row-cols-1 row-cols-md-2">
-        {% for music in musics %}
+        {% for metallica in music %}
             <div class="col mb-4">
                 <div class="card" style="width: 18rem;">
-                    <img src="{{ music.pic }}" class="card-img-top">
+                    <img src="{{ metallica.pic }}" class="card-img-top">
                     <div class="card-body">
-                        <h5 class="card-title">{{ music.name }}</h5>
-                        <p class="card-text">{{ music.instrument }}</p>
+                        <h5 class="card-title">{{ metallica.name }}</h5>
+                        <p class="card-text">{{ metallica.instrument }}</p>
+                        <a href="{{ path('getMusic', {'name': metallica.name}) }}" class="btn btn-primary">Más Info</a>
                         
                     </div>
                 </div>
